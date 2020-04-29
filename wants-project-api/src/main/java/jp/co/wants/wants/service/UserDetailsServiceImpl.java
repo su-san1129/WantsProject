@@ -20,7 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String mailAddress) throws UsernameNotFoundException {
-        System.out.println("mailAddress = " + mailAddress);
         User user = userRepository.findByMailAddress(mailAddress)
                 .orElseThrow(()->new UsernameNotFoundException("user not found."));
         final var authorities = new ArrayList<GrantedAuthority>();
