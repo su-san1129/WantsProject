@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginForm } from 'src/model/LoginForm';
 import { Observable } from 'rxjs';
 import { ResourcePath } from './resource-path';
@@ -12,10 +12,13 @@ export class AuthenticateService {
 
   url = 'http://localhost:8080/api/users';
 
+  private HTTP_HEADERS = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
   constructor(private http: HttpClient) { }
 
   public login(loginForm: LoginForm): Observable<any> {
-    return this.http.post(ResourcePath.USERS, loginForm);
+    const body = `mailAddress=${encodeURIComponent(loginForm.mailAddress)}&password=${encodeURIComponent(loginForm.password)}`;
+    return this.http.post(`${ResourcePath.URL}/login`, body, {headers: this.HTTP_HEADERS});
   }
 
   public register(registerForm: RegisterForm): Observable<any> {

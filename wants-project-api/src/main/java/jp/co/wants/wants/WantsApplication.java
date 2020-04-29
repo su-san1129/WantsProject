@@ -8,7 +8,6 @@ public class WantsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WantsApplication.class, args);
-		System.out.println("ResourcePath.USERS = " + ResourcePath.USERS);
 	}
 
 }
