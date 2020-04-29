@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(ResourcePath.USERS)
 public class UserController {
 
-    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void login(@RequestBody LoginForm loginForm){
@@ -18,7 +17,6 @@ public class UserController {
         System.out.println(loginForm);
     }
 
-    @CrossOrigin
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public void register(@RequestBody RegisterForm registerForm){
