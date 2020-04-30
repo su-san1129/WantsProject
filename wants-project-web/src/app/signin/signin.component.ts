@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { RegisterForm } from 'src/model/registerForm';
-import { AuthenticateService } from '../authenticate.service';
+import { AuthenticateService } from '../service/authenticate.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -37,7 +37,7 @@ export class SigninComponent implements OnInit {
   }
 
   isMatchPassword(): boolean {
-    return this.passwordConfirm.hasError('noMatch') && this.passwordConfirm.value.length;
+    return this.passwordConfirm.hasError('noMatch') && this.passwordConfirm.value;
   }
 
   register(e: Event) {

@@ -1,8 +1,9 @@
 import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { LoginForm } from 'src/model/LoginForm';
-import { AuthenticateService } from '../authenticate.service';
+import { AuthenticateService } from '../service/authenticate.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -43,9 +44,13 @@ export class LoginComponent implements OnInit {
     );
     this.loginForm.reset();
     this.authService.login(userLoginForm).subscribe(
-      () => {},
+      (res) => { console.log(res.headers); },
       () => this._snackBar.open('ログインに失敗しました', '閉じる', { duration: 3000 })
     );
+  }
+
+  public test() {
+    this.authService.test();
   }
 
   get mailAddress() {
