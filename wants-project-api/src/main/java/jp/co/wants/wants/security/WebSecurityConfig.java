@@ -1,20 +1,24 @@
 package jp.co.wants.wants.security;
 
+import jp.co.wants.wants.repository.UserRepository;
 import jp.co.wants.wants.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.GenericFilterBean;
 
 @Configuration
 @EnableWebSecurity
@@ -23,20 +27,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.authorizeRequests().antMatchers("/api**").authenticated();
+        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class).sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.authorizeRequests().antMatchers("/api/**").authenticated();
         http.csrf().disable();
         http.cors().configurationSource(this.corsConfigurationSource());
-        http.formLogin().loginProcessingUrl("/api/login")
+        http.formLogin().loginPage("/login").loginProcessingUrl("/api/login")
                 .permitAll()
                 .usernameParameter("mailAddress")
                 .passwordParameter("password")
                 .successHandler(successHandler())
                 .failureHandler(failureHandler());
         http.exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
-            System.out.println("authenticationEntryPoint request = " + request);
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
         }).accessDeniedHandler((request, response, accessDeniedException) -> {
             System.out.println("accessDeniedHandler request = " + request);
         });
@@ -76,6 +84,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     FailureHandler failureHandler(){
         return new FailureHandler();
+    }
+
+    GenericFilterBean jwtTokenFilter() { return new JwtTokenFilter(userRepository, "SecretKey");
     }
 
 

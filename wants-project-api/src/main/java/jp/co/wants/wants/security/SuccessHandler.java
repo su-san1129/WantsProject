@@ -1,10 +1,13 @@
 package jp.co.wants.wants.security;
 
+import jp.co.wants.wants.IdGenerator;
 import jp.co.wants.wants.domain.LoginUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+@Component
 public class SuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
@@ -21,7 +25,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
         String token = JwtTokenGenerator.generate(principal);
         response.setHeader("Authorization", String.format("Bearer %s", token));
         response.setHeader("user", principal.getUsername());
-        //clearAuthentication(request);
+        clearAuthentication(request);
     }
 
     private void clearAuthentication(HttpServletRequest request){
