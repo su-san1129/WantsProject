@@ -16,13 +16,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { SigninComponent } from './signin/signin.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
+import { WishListComponent } from './wish-list/wish-list.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { WishListShowComponent } from './parts/wish-list-show/wish-list-show.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SigninComponent,
-    HomeComponent
+    HomeComponent,
+    WishListComponent,
+    WishListShowComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,9 @@ import { HomeComponent } from './home/home.component';
     MatCardModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatGridListModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
