@@ -34,11 +34,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class).sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/**").authenticated();
+        http.authorizeRequests()
+                .antMatchers("/api/users/register").permitAll()
+                .antMatchers("/api/**").authenticated();
         http.csrf().disable();
         http.cors().configurationSource(this.corsConfigurationSource());
-        http.formLogin().loginPage("/login").loginProcessingUrl("/api/login")
-                .permitAll()
+        http.formLogin()
+                .loginProcessingUrl("/api/login").permitAll()
                 .usernameParameter("mailAddress")
                 .passwordParameter("password")
                 .successHandler(successHandler())
