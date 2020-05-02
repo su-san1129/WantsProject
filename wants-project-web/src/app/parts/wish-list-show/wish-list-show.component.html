@@ -1,6 +1,7 @@
 <mat-grid-list cols="4" rowHeight="600px">
-    <mat-grid-tile [colspan]="col">
-      <mat-card class="example-card" [style.border]="border">
+  <ng-container *ngFor="let card of cards">
+    <mat-grid-tile [colspan]="card.col">
+      <mat-card class="example-card" [style.border]="card.border">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Shiba Inu</mat-card-title>
@@ -20,4 +21,5 @@
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
+  </ng-container>
 </mat-grid-list>

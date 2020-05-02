@@ -14,6 +14,14 @@ export class WishListShowComponent implements OnInit {
   @Input()
   border: string;
 
+  cards = [
+    { col: 1, border: '1px solid' },
+    { col: 1, border: '1px solid' },
+    { col: 1, border: '1px solid' },
+    { col: 1, border: '1px solid' },
+    { col: 1, border: '1px solid' }
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

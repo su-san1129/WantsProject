@@ -20,6 +20,8 @@ import { WishListComponent } from './wish-list/wish-list.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { WishListShowComponent } from './parts/wish-list-show/wish-list-show.component';
+import { WishItemNewComponent } from './parts/wish-item-new/wish-item-new.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { WishListShowComponent } from './parts/wish-list-show/wish-list-show.com
     SigninComponent,
     HomeComponent,
     WishListComponent,
-    WishListShowComponent
+    WishListShowComponent,
+    WishItemNewComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

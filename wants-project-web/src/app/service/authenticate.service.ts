@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ResourcePath } from '../resource-path';
 import { RegisterForm } from 'src/model/registerForm';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthenticateService {
   private HTTP_HEADERS = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
   private AUTH_HEADER = new HttpHeaders({ Authorization: localStorage.getItem('authorization') });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: Router) { }
 
   public login(loginForm: LoginForm) {
     const body = `mailAddress=${encodeURIComponent(loginForm.mailAddress)}&password=${encodeURIComponent(loginForm.password)}`;
@@ -41,5 +42,10 @@ export class AuthenticateService {
 
   isAuthenticate(): boolean {
     return localStorage.getItem('authorization') !== null;
+  }
+
+  logout(): void {
+    localStorage.removeItem('authorization');
+    this.route.navigate(['/login']);
   }
 }

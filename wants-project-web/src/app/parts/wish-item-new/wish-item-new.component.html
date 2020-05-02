@@ -1,0 +1,16 @@
+<h2 class="title-margin">
+  欲しいもの新規登録
+</h2>
+<form class="example-form" [formGroup]="wishItemForm">
+  <mat-form-field class="wish-form-control">
+    <mat-label>URL</mat-label>
+    <input matInput placeholder="http://wants.co.jp/~~" formControlName="url">
+    <mat-error *ngIf="url.hasError('required')">URLは必須です</mat-error>
+  </mat-form-field>
+  <button mat-raised-button
+    color="primary"
+    class="button-margin"
+    (click)="submit($event)"
+    [disabled]="!wishItemForm.valid">登録
+  </button>
+</form>
