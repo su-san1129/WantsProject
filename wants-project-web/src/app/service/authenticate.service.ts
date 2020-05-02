@@ -44,6 +44,10 @@ export class AuthenticateService {
     return localStorage.getItem('authorization') !== null;
   }
 
+  get token() {
+    return localStorage.getItem('authorization');
+  }
+
   logout(): void {
     localStorage.removeItem('authorization');
     this.route.navigate(['/login']);

@@ -14,3 +14,39 @@
     [disabled]="!wishItemForm.valid">登録
   </button>
 </form>
+
+<h2>欲しいもの　登録フォーム</h2>
+<form class="login-form" [formGroup]="wishItemForm">
+  <mat-form-field class="wish-form-control">
+    <mat-label>商品名</mat-label>
+    <input matInput
+      placeholder="商品名"
+      formControlName="name"
+      [value]="wishItem?.name"
+      class="login-form-control"
+     />
+  </mat-form-field>
+  <br>
+  <mat-form-field class="wish-form-control">
+    <mat-label>金額</mat-label>
+    <input matInput
+      placeholder="パスワードを入力してください"
+      class="login-form-control"
+      formControlName="price"
+      [value]="wishItem?.price"
+    >
+  </mat-form-field>
+  <br>
+  <mat-form-field class="wish-form-control">
+    <mat-label>URL</mat-label>
+    <input matInput readonly
+      class="login-form-control"
+      formControlName="url"
+      [value]="wishItem?.url"
+    >
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="primary"
+    [disabled]="!wishItemForm.valid"
+  >追加</button>
+</form>
