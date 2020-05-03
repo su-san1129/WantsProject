@@ -23,6 +23,7 @@ export class WishItemNewComponent implements OnInit {
   });
 
   wishItem: WishItem;
+  imgPath = '/assets/images/default.png';
 
   constructor(private wishService: WishService) {}
 
@@ -33,8 +34,17 @@ export class WishItemNewComponent implements OnInit {
     this.wishService.save(this.url.value).subscribe((wishItem) => {
       console.log(wishItem);
       this.wishItem = wishItem;
+      if (wishItem.imagePath !== '' && wishItem.imagePath !== null) {
+        this.imgPath = wishItem.imagePath;
+      } else {
+        this.imgPath = '/assets/images/default.png';
+      }
     });
     e.preventDefault();
+  }
+
+  saveWishItem() {
+
   }
 
   get url(): AbstractControl {

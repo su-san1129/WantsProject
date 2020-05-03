@@ -25,11 +25,11 @@ public class WishItemService {
             final Optional<String> price = Optional.ofNullable(document.select("#priceblock_ourprice").text());
             final Optional<String> productTitle = Optional.ofNullable(document.select("#productTitle").text());
             final Optional<Elements> img = Optional.ofNullable(document.select("#imgTagWrapperId img"));
-            final var imgStrStart = img.toString().indexOf("https://images-na.");
-            final var imgStrEnd = img.toString().indexOf("onload=");
+            final int imgStrStart = img.toString().indexOf("data-old-hires=\"https://images-na");
+            final int imgStrEnd = img.toString().indexOf("onload=");
             String subStrImg = null;
             if (!(imgStrStart == -1 || imgStrEnd == -1) && img.isPresent()) {
-                subStrImg = img.get().toString().substring(imgStrStart-9, imgStrEnd-11);
+                subStrImg = img.get().toString().substring(imgStrStart+7, imgStrEnd-11);
             }
 //            wishItemRepository.save(WishItem.builder()
 //                    .name(productTitle)

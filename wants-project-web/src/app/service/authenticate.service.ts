@@ -15,7 +15,6 @@ export class AuthenticateService {
   url = 'http://localhost:8080/api/users';
 
   private HTTP_HEADERS = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-  private AUTH_HEADER = new HttpHeaders({ Authorization: localStorage.getItem('authorization') });
 
   constructor(private http: HttpClient, private route: Router) { }
 
@@ -37,11 +36,33 @@ export class AuthenticateService {
 
   public test(): void {
     // tslint:disable-next-line: max-line-length
-    this.http.get(ResourcePath.USERS, {headers: this.AUTH_HEADER}).subscribe(respnse => console.log(respnse));
+    this.decodeJWT();
+    this.http.get(ResourcePath.USERS).subscribe(respnse => console.log(respnse));
   }
 
   isAuthenticate(): boolean {
     return localStorage.getItem('authorization') !== null;
+  }
+
+  public isExpire(): boolean  {
+    if (this.decodeJWT() == null) {
+      return;
+    }
+    const expire = this.decodeJWT().exp * 1000;
+    const today = new Date().getTime();
+    console.log('expire : ', expire, ' today : ', today);
+    return expire >= today;
+  }
+
+  private decodeJWT() {
+    if (!this.token) {
+      return null;
+    }
+
+    const base64Url = this.token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const decode = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+    return decode;
   }
 
   get token() {

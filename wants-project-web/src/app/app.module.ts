@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SigninComponent } from './signin/signin.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
@@ -22,6 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { WishListShowComponent } from './parts/wish-list-show/wish-list-show.component';
 import { WishItemNewComponent } from './parts/wish-item-new/wish-item-new.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthenticateInterceptor } from './authenticate-Interceptor';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,9 @@ import { HeaderComponent } from './header/header.component';
     MatGridListModule,
     MatTabsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
