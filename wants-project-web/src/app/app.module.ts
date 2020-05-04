@@ -23,6 +23,7 @@ import { WishListShowComponent } from './parts/wish-list-show/wish-list-show.com
 import { WishItemNewComponent } from './parts/wish-item-new/wish-item-new.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthenticateInterceptor } from './authenticate-Interceptor';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AuthenticateInterceptor } from './authenticate-Interceptor';
     HttpClientModule,
     MatSnackBarModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }

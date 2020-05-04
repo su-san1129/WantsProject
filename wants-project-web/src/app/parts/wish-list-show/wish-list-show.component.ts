@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { WishItem } from 'src/app/model/wish-item';
+import { WishService } from 'src/app/service/wish.service';
 
 @Component({
   selector: 'app-wish-list-show',
@@ -7,24 +9,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class WishListShowComponent implements OnInit {
 
-  @Input()
-  row: number;
-  @Input()
-  col: number;
-  @Input()
-  border: string;
-
-  cards = [
-    { col: 1, border: '1px solid' },
-    { col: 1, border: '1px solid' },
-    { col: 1, border: '1px solid' },
-    { col: 1, border: '1px solid' },
-    { col: 1, border: '1px solid' }
-  ];
+  @Input() wishItems: WishItem[];
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

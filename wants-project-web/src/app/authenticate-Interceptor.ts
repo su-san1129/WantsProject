@@ -16,7 +16,6 @@ export class AuthenticateInterceptor implements HttpInterceptor {
           Authorization: localStorage.getItem('authorization')
         }
       });
-      console.log('おるぞ');
     }
     return next.handle(req);
   }

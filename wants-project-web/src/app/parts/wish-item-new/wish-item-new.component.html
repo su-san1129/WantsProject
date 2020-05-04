@@ -1,37 +1,43 @@
-<h2 class="title-margin">
-  欲しいもの新規登録
-</h2>
-<form class="example-form" [formGroup]="wishItemForm">
-  <mat-form-field class="wish-form-control">
-    <mat-label>URL</mat-label>
-    <input matInput placeholder="http://wants.co.jp/~~" formControlName="url">
-    <mat-error *ngIf="url.hasError('required')">URLは必須です</mat-error>
-  </mat-form-field>
-  <button mat-raised-button color="primary" class="button-margin" (click)="submit($event)"
-    [disabled]="!wishItemForm.valid">登録
-  </button>
-</form>
-<mat-card>
-  <mat-card-title>欲しいもの　登録フォーム</mat-card-title>
-  <form class="login-form" [formGroup]="wishItemForm">
+<ng-container  *ngIf="flag">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  商品情報を取得中です...
+</ng-container>
+<div class="wrapper">
+  <h2 class="title-margin">
+    欲しいもの新規登録
+  </h2>
+  <form class="example-form" [formGroup]="wishItemForm">
     <mat-form-field class="wish-form-control">
-      <mat-label>商品名</mat-label>
-      <input matInput placeholder="商品名" formControlName="name" [value]="wishItem?.name" class="login-form-control" />
+      <mat-label>URL</mat-label>
+      <input matInput placeholder="http://wants.co.jp/~~" formControlName="url">
+      <mat-error *ngIf="url.hasError('required')">URLは必須です</mat-error>
     </mat-form-field>
-    <br>
-    <mat-form-field class="wish-form-control">
-      <mat-label>金額</mat-label>
-      <input matInput placeholder="パスワードを入力してください" class="login-form-control" formControlName="price"
-        [value]="wishItem?.price">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="wish-form-control">
-      <mat-label>URL(読み取り専用)</mat-label>
-      <input matInput readonly class="login-form-control" formControlName="url" [value]="wishItem?.url">
-    </mat-form-field>
-    <br>
-    <img [src]="imgPath">
-    <br>
-    <button mat-raised-button color="primary" [disabled]="!wishItemForm.valid">追加</button>
+    <button mat-raised-button color="primary" class="button-margin" (click)="analysisUrl($event)"
+      [disabled]="!wishItemForm.valid">登録
+    </button>
   </form>
-</mat-card>
+  <mat-card>
+    <mat-card-title>欲しいもの　登録フォーム</mat-card-title>
+    <form class="login-form" [formGroup]="wishItemForm">
+      <mat-form-field class="wish-form-control">
+        <mat-label>商品名</mat-label>
+        <input matInput placeholder="商品名" formControlName="name" [value]="wishItem?.name" class="login-form-control" />
+      </mat-form-field>
+      <br>
+      <mat-form-field class="wish-form-control">
+        <mat-label>金額</mat-label>
+        <input matInput placeholder="パスワードを入力してください" class="login-form-control" formControlName="price"
+          [value]="wishItem?.price">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="wish-form-control">
+        <mat-label>URL(読み取り専用)</mat-label>
+        <input matInput readonly class="login-form-control" formControlName="url" [value]="wishItem?.url">
+      </mat-form-field>
+      <br>
+      <img [src]="imgPath">
+      <br>
+      <button mat-raised-button color="primary" [disabled]="!wishItemForm.valid" (click)="saveWishItem()">追加</button>
+    </form>
+  </mat-card>
+</div>

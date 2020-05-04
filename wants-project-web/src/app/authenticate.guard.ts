@@ -15,14 +15,12 @@ export class AuthenticateGuard implements CanActivate {
     console.log(!this.authService.isExpire());
 
     if (this.authService.isAuthenticate() && this.authService.isExpire()) {
-      console.log('成功');
       return true;
     } else if (!this.authService.isExpire()) {
       alert('ログインの有効期限が過ぎました。再度ログインしてください');
       this.authService.logout();
     } else {
       this.router.navigate(['/login']);
-      console.log('失敗');
     }
     return false;
   }

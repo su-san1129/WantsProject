@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { WishService } from 'src/app/service/wish.service';
 import { WishItem } from 'src/app/model/wish-item';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-wish-item-new',
@@ -20,31 +21,42 @@ export class WishItemNewComponent implements OnInit {
     price: new FormControl(''),
     salePrice: new FormControl(''),
     imagePath: new FormControl(''),
-  });
+    });
+
+  @Output() sendWishItem = new EventEmitter<WishItem>();
 
   wishItem: WishItem;
   imgPath = '/assets/images/default.png';
+  flag = false;
 
-  constructor(private wishService: WishService) {}
+  constructor(private wishService: WishService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
 
-  submit(e: Event): void {
-    console.log(this.wishItemForm.value.url);
+  analysisUrl(e: Event): void {
+    this.flag = true;
     this.wishService.save(this.url.value).subscribe((wishItem) => {
-      console.log(wishItem);
       this.wishItem = wishItem;
       if (wishItem.imagePath !== '' && wishItem.imagePath !== null) {
         this.imgPath = wishItem.imagePath;
       } else {
         this.imgPath = '/assets/images/default.png';
       }
-    });
+    },
+      () => { },
+      () => this.flag = false
+    );
     e.preventDefault();
   }
 
   saveWishItem() {
-
+    this.wishService.saveWishItem(this.wishItem).subscribe(
+      () => {
+        this.sendWishItem.emit(this.wishItem);
+        this.wishItemForm.reset();
+      },
+      () => this.snackBar.open('登録に失敗しました', '閉じる', { duration: 2500 })
+    );
   }
 
   get url(): AbstractControl {
