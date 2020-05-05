@@ -48,7 +48,7 @@ public class WishItemService {
         return null;
     }
 
-    public void saveWishItem(String userId, WishForm itemForm) {
+    public WishItem saveWishItem(String userId, WishForm itemForm) {
         final var build = WishItem.builder()
                 .userId(userId)
                 .price(itemForm.getPrice())
@@ -59,10 +59,14 @@ public class WishItemService {
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
                 .build();
-        wishItemRepository.save(build);
+        return wishItemRepository.save(build);
     }
 
     public List<WishItem> getWishItemByUserId(String userId){
         return wishItemRepository.findAllByUserId(userId);
+    }
+
+    public void deleteWishItemById(Integer id) {
+        wishItemRepository.deleteById(id);
     }
 }

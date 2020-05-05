@@ -27,13 +27,19 @@ public class WishController {
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveWishes(@RequestBody WishForm wishForm, @AuthenticationPrincipal LoginUser loginUser) {
-        wishItemService.saveWishItem(loginUser.getUser().getUserId(), wishForm);
+    public WishItem saveWishes(@RequestBody WishForm wishForm, @AuthenticationPrincipal LoginUser loginUser) {
+        return wishItemService.saveWishItem(loginUser.getUser().getUserId(), wishForm);
     }
 
     @GetMapping
     public List<WishItem> getWishItems(@AuthenticationPrincipal LoginUser loginUser) {
         return wishItemService.getWishItemByUserId(loginUser.getUser().getUserId());
+    }
+
+    @DeleteMapping
+    public void deleteWishItem(@RequestParam("id") Integer id){
+        System.out.println("delete item = " + id);
+        wishItemService.deleteWishItemById(id);
     }
 
 }
