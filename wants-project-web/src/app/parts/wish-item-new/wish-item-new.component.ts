@@ -15,13 +15,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./wish-item-new.component.scss'],
 })
 export class WishItemNewComponent implements OnInit {
-    wishItemForm = new FormGroup({
+
+  wishItemForm = new FormGroup({
     url: new FormControl('', Validators.required),
     name: new FormControl(''),
     price: new FormControl(''),
     salePrice: new FormControl(''),
-    imagePath: new FormControl(''),
-    });
+    imagePath: new FormControl('')
+  });
 
   @Output() sendWishItem = new EventEmitter<WishItem>();
 
@@ -37,13 +38,9 @@ export class WishItemNewComponent implements OnInit {
     this.flag = true;
     this.wishService.save(this.url.value).subscribe((wishItem) => {
       this.wishItem = wishItem;
-      if (wishItem.imagePath !== '' && wishItem.imagePath !== null) {
-        this.imgPath = wishItem.imagePath;
-      } else {
-        this.imgPath = '/assets/images/default.png';
-      }
+      this.checkImgPath(wishItem);
     },
-      () => { },
+      () => this.flag = false,
       () => this.flag = false
     );
     e.preventDefault();
@@ -51,8 +48,11 @@ export class WishItemNewComponent implements OnInit {
 
   saveWishItem() {
     this.wishService.saveWishItem(this.wishItem).subscribe(
-      () => {
-        this.sendWishItem.emit(this.wishItem);
+      wishItem => {
+        console.log(wishItem);
+        this.snackBar.open('登録が完了しました！', '閉じる', { duration: 2500 })
+        this.sendWishItem.emit(wishItem);
+        this.imgPath = '/assets/images/default.png';
         this.wishItemForm.reset();
       },
       () => this.snackBar.open('登録に失敗しました', '閉じる', { duration: 2500 })
@@ -61,5 +61,13 @@ export class WishItemNewComponent implements OnInit {
 
   get url(): AbstractControl {
     return this.wishItemForm.get('url');
+  }
+
+  private checkImgPath(wishItem: WishItem) {
+    if (wishItem.imagePath !== '' && wishItem.imagePath !== null) {
+      this.imgPath = wishItem.imagePath;
+    } else {
+      this.imgPath = '/assets/images/default.png';
+    }
   }
 }

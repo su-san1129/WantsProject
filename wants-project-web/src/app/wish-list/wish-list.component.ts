@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ThemePalette, CanColorCtor } from '@angular/material/core';
 import { WishItem } from '../model/wish-item';
 import { WishService } from '../service/wish.service';

@@ -9,8 +9,8 @@
         </mat-card-header>
         <img mat-card-image [src]="item.imagePath" alt="Photo of a Shiba Inu">
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button mat-button>Button</button>
+          <button mat-button (click)="deleteWishItem(item.id)">DELETE</button>
         </mat-card-actions>
       </mat-card>
       <br>

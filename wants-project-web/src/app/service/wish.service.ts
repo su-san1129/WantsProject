@@ -24,4 +24,8 @@ export class WishService {
     return this.http.get<WishItem[]>(`${ResourcePath.URL}/wishes`);
   }
 
+  public deleteWishItem(id: number): Observable<any> {
+    return this.http.delete(`${ResourcePath.URL}/wishes?id=${id}`);
+  }
+
 }
