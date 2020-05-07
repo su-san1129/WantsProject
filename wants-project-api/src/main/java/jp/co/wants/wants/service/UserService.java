@@ -26,6 +26,7 @@ public class UserService {
                 .mailAddress(registerForm.getMailAddress())
                 .password(passwordEncoder.encode(registerForm.getPassword()))
                 .role("MEMBER")
+                .isMember(false)
                 .build();
         userRepository.save(user);
     }

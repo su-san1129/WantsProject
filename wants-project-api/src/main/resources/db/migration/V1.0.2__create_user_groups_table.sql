@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS user_groups (
+  id serial NOT NULL
+  , name VARCHAR(255) DEFAULT NULL
+  , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  , updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  , PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS belongs_to_group_users (
+  id serial NOT NULL
+  , user_group_id INT NOT NULL
+  , user_id VARCHAR(255) NOT NULL
+  , is_owner BOOLEAN DEFAULT FALSE
+  , is_approved BOOLEAN DEFAULT FALSE
+  , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  , updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  , PRIMARY KEY(id)
+  , CONSTRAINT FK__belongs_to_group_users__user_group_id FOREIGN KEY (user_group_id) REFERENCES user_groups (id)
+  , CONSTRAINT FK__belongs_to_group_users__user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
+);

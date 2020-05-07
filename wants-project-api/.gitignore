@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+/data/wants.mv.db
+/data/wants.trace.db
+/src/main/resources/application-dev.properties
