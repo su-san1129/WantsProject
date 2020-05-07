@@ -4,14 +4,17 @@
     <span>
       <a mat-button routerLink="" class="header-button">Exchanges</a>
     </span>
-    <span>
+    <span *ngIf="!isAuthe">
       <a mat-button routerLink="login" class="header-button">Login</a>
     </span>
-    <span>
+    <span *ngIf="!isAuthe">
       <a mat-button routerLink="signin" class="header-button">sign-in</a>
     </span>
     <span *ngIf="isAuthe">
       <a mat-button routerLink="wish" class="header-button">wish-list</a>
+    </span>
+    <span *ngIf="isAuthe">
+      <a mat-button routerLink="user_group" class="header-button">user-group</a>
     </span>
     <span *ngIf="isAuthe">
       <a mat-button (click)="logout()" class="header-button">logout</a>

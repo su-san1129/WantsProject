@@ -77,4 +77,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-wants-project-api/data/wants.mv.db

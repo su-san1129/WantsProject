@@ -50,7 +50,7 @@ export class WishItemNewComponent implements OnInit {
     this.wishService.saveWishItem(this.wishItem).subscribe(
       wishItem => {
         console.log(wishItem);
-        this.snackBar.open('登録が完了しました！', '閉じる', { duration: 2500 })
+        this.snackBar.open('登録が完了しました！', '閉じる', { duration: 2500 });
         this.sendWishItem.emit(wishItem);
         this.imgPath = '/assets/images/default.png';
         this.wishItemForm.reset();
