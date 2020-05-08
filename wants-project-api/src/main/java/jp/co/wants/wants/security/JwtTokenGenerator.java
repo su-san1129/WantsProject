@@ -21,7 +21,6 @@ public class JwtTokenGenerator {
                 .withIssuedAt(issuedAt)
                 .withExpiresAt(expiresAt)
                 .sign(algorithmHS);
-        System.out.println("token = " + token);
         return token;
 
     }

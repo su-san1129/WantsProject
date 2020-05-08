@@ -17,9 +17,9 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
+    private final MailSenderService mailSenderService;
 
     public void save(RegisterForm registerForm){
-        System.out.println("IdGenerator.setPrimaryKey() = " + IdGenerator.setPrimaryKey());
         User user = User.builder()
                 .userId(IdGenerator.setPrimaryKey())
                 .name(registerForm.getName())
@@ -28,6 +28,13 @@ public class UserService {
                 .role("MEMBER")
                 .isMember(false)
                 .build();
+        mailSenderService.send(user.getUserId());
+        userRepository.save(user);
+    }
+
+    public void checkUserId(String userId) {
+        final User user = userRepository.findByUserId(userId).orElseThrow();
+        user.setMember(true);
         userRepository.save(user);
     }
 
