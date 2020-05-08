@@ -13,6 +13,20 @@ wants-project-web => Angularファイル
 ## 概要等
 open-jdk: 11  
 angular-cli: 9
+
+## 環境構築
+wants-project-web => Angularのため、
+```
+$ ng serve
+```
+で`http://localhost:4200`が立ち上がります 
+
+wants-project-api => 
+* IDEがIntelliJの場合
+`build.gradle`をrun  
+* IDEがEclipseの場合
+`build.gradle`をリフレッシュ  
+その後、SpringBootアプリケーションを起動で、`http://localhost8080`が立ち上がります
  
 **覚えたいもの** 
  - JWT認証(JSON Web Token)
