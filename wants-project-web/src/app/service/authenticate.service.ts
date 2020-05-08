@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { ResourcePath } from '../resource-path';
 import { RegisterForm } from 'src/model/registerForm';
 import { tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class AuthenticateService {
 
   private HTTP_HEADERS = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
 
-  constructor(private http: HttpClient, private route: Router) { }
+  constructor(private http: HttpClient, private route: Router, private activatedRoute: ActivatedRoute) { }
 
   public login(loginForm: LoginForm) {
     const body = `mailAddress=${encodeURIComponent(loginForm.mailAddress)}&password=${encodeURIComponent(loginForm.password)}`;
@@ -37,7 +37,7 @@ export class AuthenticateService {
   public test(): void {
     // tslint:disable-next-line: max-line-length
     this.decodeJWT();
-    this.http.get(ResourcePath.USERS).subscribe(respnse => console.log(respnse));
+    this.http.get(ResourcePath.USERS).subscribe(response => console.log(response));
   }
 
   isAuthenticate(): boolean {
@@ -72,5 +72,12 @@ export class AuthenticateService {
   logout(): void {
     localStorage.removeItem('authorization');
     this.route.navigate(['/login']);
+  }
+
+  registerMainRegistration() {
+    const id = this.activatedRoute.snapshot.queryParamMap.get('validateId');
+    console.log(id);
+    console.log(this.activatedRoute.snapshot);
+    return this.http.post(`${ResourcePath.USERS}/register/main_registration`, { validateId: id });
   }
 }

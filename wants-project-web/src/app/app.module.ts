@@ -26,6 +26,7 @@ import { AuthenticateInterceptor } from './authenticate-Interceptor';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserGroupComponent } from './user-group/user-group.component';
 import { MatTableModule } from '@angular/material/table';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatTableModule } from '@angular/material/table';
     WishListShowComponent,
     WishItemNewComponent,
     HeaderComponent,
-    UserGroupComponent
+    UserGroupComponent,
+    AuthenticateComponent
   ],
   imports: [
     BrowserModule,

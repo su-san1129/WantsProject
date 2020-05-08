@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthenticateGuard } from './authenticate.guard';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { UserGroupComponent } from './user-group/user-group.component';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'wish', component: WishListComponent, canActivate: [AuthenticateGuard] },
-  { path: 'user_group', component: UserGroupComponent, canActivate: [AuthenticateGuard]}
+  { path: 'user_group', component: UserGroupComponent, canActivate: [AuthenticateGuard] },
+  { path: 'authenticate', component: AuthenticateComponent }
 ];
 
 @NgModule({
