@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { UserGroupRequest } from '../model/user-group-request';
+import { UserGroupService } from '../service/user-group.service';
+import { AuthenticateService } from '../service/authenticate.service';
 
 export interface PeriodicElement {
   name: string;
@@ -28,8 +31,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class UserGroupComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private userGroupService: UserGroupService, private auth: AuthenticateService) { }
 
+  userGroupRequest: UserGroupRequest;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
   userGroupForm: FormGroup;
@@ -43,10 +47,20 @@ export class UserGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.userGroupService.getGroupByuserId(this.auth.userId).subscribe(
+      userGroup => console.log(userGroup)
+    );
   }
 
   submit(e: Event): void {
     console.log('submit method');
+    const mailList: string[] = this.options.value.filter(ary => ary.mailAddress).map(ary => ary.mailAddress);
+    mailList.push(this.userGroupForm.get('mailAddress').value);
+    this.userGroupRequest = new UserGroupRequest(this.groupName.value, mailList);
+    console.log(this.userGroupRequest);
+    this.userGroupService.saveUserGroup(this.userGroupRequest).subscribe(
+      belongsToGroupUsers => console.log(belongsToGroupUsers)
+    );
     e.preventDefault();
   }
 
@@ -58,6 +72,9 @@ export class UserGroupComponent implements OnInit {
     this.options.removeAt(index);
   }
 
+  get groupName(): AbstractControl {
+    return this.userGroupForm.get('groupName');
+  }
   get optionForm(): FormGroup {
     return this.fb.group({
       mailAddress: [''],

@@ -38,7 +38,7 @@
           </div>
         </div>
         <br>
-        <button mat-raised-button color="primary" [disabled]="!userGroupForm.valid">登録</button>
+        <button mat-raised-button color="primary" [disabled]="!userGroupForm.valid" (click)="submit($event)">登録</button>
       </form>
     </mat-card-content>
   </mat-card>

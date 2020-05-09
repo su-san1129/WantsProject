@@ -48,7 +48,12 @@ export class LoginComponent implements OnInit {
     this.authService.login(userLoginForm).subscribe(
       (res) => {
         console.log(res.headers);
-        this.router.navigate(['/wish']);
+        if (sessionStorage.getItem('path')) {
+          const next = decodeURIComponent(sessionStorage.getItem('path'));
+          this.router.navigateByUrl(next);
+        } else {
+          this.router.navigate(['/wish']);
+        }
       },
       () => this._snackBar.open('ログインに失敗しました', '閉じる', { duration: 3000 })
     );

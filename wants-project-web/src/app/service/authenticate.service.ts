@@ -65,6 +65,10 @@ export class AuthenticateService {
     return decode;
   }
 
+  get userId() {
+    return this.decodeJWT().sub;
+  }
+
   get token() {
     return localStorage.getItem('authorization');
   }

@@ -27,6 +27,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserGroupComponent } from './user-group/user-group.component';
 import { MatTableModule } from '@angular/material/table';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { UserGroupConfirmComponent } from './user-group-confirm/user-group-confirm.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     WishItemNewComponent,
     HeaderComponent,
     UserGroupComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    UserGroupConfirmComponent
   ],
   imports: [
     BrowserModule,

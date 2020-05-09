@@ -7,6 +7,7 @@ import { AuthenticateGuard } from './authenticate.guard';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { UserGroupComponent } from './user-group/user-group.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { UserGroupConfirmComponent } from './user-group-confirm/user-group-confirm.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'wish', component: WishListComponent, canActivate: [AuthenticateGuard] },
   { path: 'user_group', component: UserGroupComponent, canActivate: [AuthenticateGuard] },
+  { path: 'user_group_confirm', component: UserGroupConfirmComponent, canActivate: [AuthenticateGuard] },
   { path: 'authenticate', component: AuthenticateComponent }
 ];
 
