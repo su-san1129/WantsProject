@@ -1,6 +1,3 @@
-table {
-  width: 100%;
-}
 .user-group-form-control{
   width: 80%;
   margin-left: 10px;
@@ -18,4 +15,52 @@ table {
 
 .user-group-form-span {
   padding-right: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+tr.user-group-detail-row {
+  height: 0;
+}
+
+tr.user-group-element-row:not(.user-group-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.user-group-element-row:not(.user-group-expanded-row):active {
+  background: #efefef;
+}
+
+.user-group-element-row td {
+  border-bottom-width: 0;
+}
+
+.user-group-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.user-group-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.user-group-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.user-group-element-description {
+  padding: 16px;
+}
+
+.user-group-element-description-attribution {
+  opacity: 0.5;
 }

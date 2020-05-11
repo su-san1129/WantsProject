@@ -16,8 +16,8 @@ export class UserGroupService {
     return this.http.get<UserGroup>(`${ResourcePath.USER_GROUPS}?id=${id}`);
   }
 
-  getGroupByuserId(id: string): Observable<UserGroup> {
-    return this.http.get<UserGroup>(`${ResourcePath.USER_GROUPS}/${id}`);
+  getGroupByuserId(id: string): Observable<UserGroup[]> {
+    return this.http.get<UserGroup[]>(`${ResourcePath.USER_GROUPS}/${id}`);
   }
 
   saveUserGroup(userGroupRequest: UserGroupRequest): Observable<any> {
