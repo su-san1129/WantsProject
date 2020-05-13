@@ -2,7 +2,7 @@
   <div *ngIf="!wishItems.length">表示するアイテムがありません</div>
   <ng-container *ngFor="let item of wishItems">
     <mat-grid-tile [colspan]="1">
-      <mat-card class="example-card">
+      <mat-card (click)="goToLink(item.url)" class="wish-list-card">
         <mat-card-header style="height: 100px;">
           <mat-card-title>{{item.name.substring(0,30)}}</mat-card-title>
           <mat-card-subtitle>{{item.price}}</mat-card-subtitle>

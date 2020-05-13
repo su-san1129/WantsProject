@@ -3,3 +3,38 @@ img {
   object-fit: cover; /* この一行を追加するだけ！ */
   text-align: center;
 }
+
+$defaultDuration: 0.3s;
+$primaryColour: #ececec;
+$secondaryColour: #666;
+$shadowColour: rgba(0, 0, 0, 0.6);
+
+@mixin hideTapHighlightColor() {
+  //Prevent highlight colour when element is tapped
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@mixin hardwareAccel() {
+  //Improve performance on mobile/tablet devices
+  transform: translateZ(0);
+}
+
+@mixin improveAntiAlias() {
+  //Improve aliasing on mobile/tablet devices
+  box-shadow: 0 4 6px rgba(0, 0, 0, 0);
+}
+
+.wish-list-card {
+  display: inline-block;
+  transition-duration: $defaultDuration;
+  transition-property: transform;
+  cursor: pointer;
+
+  @include hideTapHighlightColor();
+  @include hardwareAccel();
+  @include improveAntiAlias();
+
+  &:hover {
+    transform: scale(0.95);
+  }
+}
