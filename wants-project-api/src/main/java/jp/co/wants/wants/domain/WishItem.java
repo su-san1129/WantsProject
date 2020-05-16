@@ -15,8 +15,8 @@ public class WishItem {
     private int id;
     private String userId;
     private String name;
-    private String price;
-    private String salePrice;
+    private Integer price;
+    private Integer salePrice;
     private String url;
     private String imagePath;
     private Timestamp createdAt;

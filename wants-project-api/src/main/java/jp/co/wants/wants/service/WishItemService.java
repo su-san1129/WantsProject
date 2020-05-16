@@ -25,8 +25,25 @@ public class WishItemService {
         Document document = null;
         try {
             document = Jsoup.connect(url).get();
-            final Optional<String> salePrice = Optional.ofNullable(document.select("#priceblock_saleprice").text());
-            final Optional<String> price = Optional.ofNullable(document.select("#priceblock_ourprice").text());
+            Integer displaySalePrice = null;
+            Integer displayPrice = null;
+            final StringBuilder salePrice = new StringBuilder(document.select("#priceblock_saleprice").text());
+            if(!salePrice.toString().isBlank()){
+                displaySalePrice = Integer.parseInt(
+                        salePrice.deleteCharAt(0)
+                                 .deleteCharAt(salePrice.indexOf(","))
+                                 .toString());
+            }
+            System.out.println("displaySalePrice = " + displaySalePrice);
+            final StringBuilder price = new StringBuilder(document.select("#priceblock_ourprice").text());
+            if(!price.toString().isBlank()){
+                displayPrice = Integer.parseInt(
+                        price.deleteCharAt(0)
+                             .deleteCharAt(price.indexOf(","))
+                             .toString());
+            }
+
+            System.out.println("displayPrice = " + displayPrice);
             final Optional<String> productTitle = Optional.ofNullable(document.select("#productTitle").text());
             final Optional<Elements> img = Optional.ofNullable(document.select("#imgTagWrapperId img"));
             final int imgStrStart = img.toString().indexOf("data-old-hires=\"https://images-na");
@@ -37,8 +54,8 @@ public class WishItemService {
             }
             return WishItem.builder()
                     .name(productTitle.get())
-                    .price(price.get())
-                    .salePrice(salePrice.get())
+                    .price(displayPrice)
+                    .salePrice(displaySalePrice)
                     .imagePath( subStrImg != null ? subStrImg : "")
                     .url(url)
                     .build();
