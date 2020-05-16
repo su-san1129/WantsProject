@@ -27,7 +27,7 @@
       <mat-form-field class="wish-form-control">
         <mat-label>金額</mat-label>
         <input matInput placeholder="パスワードを入力してください" class="login-form-control" formControlName="price"
-          [value]="wishItem?.price">
+          [value]="wishItem?.price | number">
       </mat-form-field>
       <br>
       <mat-form-field class="wish-form-control">

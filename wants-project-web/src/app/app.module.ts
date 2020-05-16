@@ -19,7 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
-import { WishListShowComponent } from './parts/wish-list-show/wish-list-show.component';
+import { WishListShowComponent, DeleteDialog } from './parts/wish-list-show/wish-list-show.component';
 import { WishItemNewComponent } from './parts/wish-item-new/wish-item-new.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthenticateInterceptor } from './authenticate-Interceptor';
@@ -28,6 +28,8 @@ import { UserGroupComponent } from './user-group/user-group.component';
 import { MatTableModule } from '@angular/material/table';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { UserGroupConfirmComponent } from './user-group-confirm/user-group-confirm.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { UserGroupConfirmComponent } from './user-group-confirm/user-group-confi
     MatGridListModule,
     MatTabsModule,
     MatProgressBarModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }
