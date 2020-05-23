@@ -8,6 +8,8 @@ import { WishListComponent } from './wish-list/wish-list.component';
 import { UserGroupComponent } from './user-group/user-group.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { UserGroupConfirmComponent } from './user-group-confirm/user-group-confirm.component';
+import { RegisterUserFromGroupComponent } from './parts/register-user-from-group/register-user-from-group.component';
+import { GroupConfirmGuard } from './group-confirm.guard';
 
 
 const routes: Routes = [
@@ -17,7 +19,8 @@ const routes: Routes = [
   { path: 'wish', component: WishListComponent, canActivate: [AuthenticateGuard] },
   { path: 'user_group', component: UserGroupComponent, canActivate: [AuthenticateGuard] },
   { path: 'user_group_confirm', component: UserGroupConfirmComponent, canActivate: [AuthenticateGuard] },
-  { path: 'authenticate', component: AuthenticateComponent }
+  { path: 'authenticate', component: AuthenticateComponent },
+  { path: 'authenticate_register/:id/:userId', component: RegisterUserFromGroupComponent, canActivate: [GroupConfirmGuard] }
 ];
 
 @NgModule({

@@ -30,6 +30,8 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { UserGroupConfirmComponent } from './user-group-confirm/user-group-confirm.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RegisterUserFromGroupComponent } from './parts/register-user-from-group/register-user-from-group.component';
+import { RegisterUserFromGroupDialogComponent } from './parts/register-user-from-group-dialog/register-user-from-group-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     HeaderComponent,
     UserGroupComponent,
     AuthenticateComponent,
-    UserGroupConfirmComponent
+    UserGroupConfirmComponent,
+    RegisterUserFromGroupComponent,
+    RegisterUserFromGroupDialogComponent
   ],
   imports: [
     BrowserModule,

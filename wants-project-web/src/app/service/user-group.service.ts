@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UserGroup } from '../model/user-group';
 import { ResourcePath } from '../resource-path';
 import { UserGroupRequest } from '../model/user-group-request';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class UserGroupService {
 
   saveUserGroup(userGroupRequest: UserGroupRequest): Observable<any> {
     return this.http.post<UserGroupRequest>(ResourcePath.USER_GROUPS, userGroupRequest);
+  }
+
+  getPreUser(id: string): Observable<User> {
+    return this.http.get<User>(`${ResourcePath.USERS}/pre_user/${id}`);
   }
 
 }

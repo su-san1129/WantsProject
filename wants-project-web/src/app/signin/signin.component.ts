@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
-import { RegisterForm } from 'src/model/registerForm';
 import { AuthenticateService } from '../service/authenticate.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RegisterForm } from '../form/register-form';
 
 @Component({
   selector: 'app-signin',

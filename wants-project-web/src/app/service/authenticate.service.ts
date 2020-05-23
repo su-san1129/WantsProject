@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginForm } from 'src/model/LoginForm';
 import { Observable } from 'rxjs';
 import { ResourcePath } from '../resource-path';
-import { RegisterForm } from 'src/model/registerForm';
 import { tap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { RegisterPreUserForm } from '../form/register-pre-user-form';
+import { LoginForm } from '../form/login-form';
+import { RegisterForm } from '../form/register-form';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,9 @@ export class AuthenticateService {
     console.log(id);
     console.log(this.activatedRoute.snapshot);
     return this.http.post(`${ResourcePath.USERS}/register/main_registration`, { validateId: id });
+  }
+
+  public registerPreUser(registerForm: RegisterPreUserForm): Observable<any> {
+    return this.http.post(`${ResourcePath.USERS}/register/main_registration/pre_user`, registerForm);
   }
 }

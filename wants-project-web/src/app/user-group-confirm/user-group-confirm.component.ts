@@ -22,4 +22,8 @@ export class UserGroupConfirmComponent implements OnInit {
 
   }
 
+  join() {
+
+  }
+
 }

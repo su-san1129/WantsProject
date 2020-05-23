@@ -1,10 +1,10 @@
 import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { LoginForm } from 'src/model/LoginForm';
 import { AuthenticateService } from '../service/authenticate.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginForm } from '../form/login-form';
 
 
 @Component({
@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthenticateService,
-    // tslint:disable-next-line: variable-name
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private router: Router
   ) { }
 
@@ -47,7 +46,6 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
     this.authService.login(userLoginForm).subscribe(
       (res) => {
-        console.log(res.headers);
         if (sessionStorage.getItem('path')) {
           const next = decodeURIComponent(sessionStorage.getItem('path'));
           this.router.navigateByUrl(next);
@@ -55,7 +53,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/wish']);
         }
       },
-      () => this._snackBar.open('ログインに失敗しました', '閉じる', { duration: 3000 })
+      () => this.snackBar.open('ログインに失敗しました', '閉じる', { duration: 3000 })
     );
   }
 
