@@ -24,10 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String mailAddress) throws UsernameNotFoundException {
         User user = userRepository.findByMailAddress(mailAddress)
                 .orElseThrow(()->new UsernameNotFoundException("user not found."));
-        if(!user.isMember()) {
-            log.info("user is not main registration");
-            throw new UsernameNotFoundException("user is not main registration");
-        }
         final var authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return new LoginUser(user, authorities);

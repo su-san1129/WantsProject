@@ -16,5 +16,4 @@ CREATE TABLE IF NOT EXISTS belongs_to_group_users (
   , updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   , PRIMARY KEY(id)
   , CONSTRAINT FK__belongs_to_group_users__user_group_id FOREIGN KEY (user_group_id) REFERENCES user_groups (id)
-  , CONSTRAINT FK__belongs_to_group_users__user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
