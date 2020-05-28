@@ -10,21 +10,30 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthenticateService) { }
 
-  isAuth: boolean;
+  isAuthenticate: boolean;
 
+  headers = [
+    { path: '', name: 'トップ'},
+    { path: 'login', name: 'ログイン'},
+    { path: 'signin', name: '新規登録'},
+    { path: 'wish', name: '欲しいものリスト'},
+    { path: 'user_group', name: 'ユーザーグループ'},
+  ];
 
   ngOnInit(): void {
-    this.isAuth = this.authService.isAuthenticate();
-    console.log(this.authService.isAuthenticate());
   }
 
   logout(): void {
     this.authService.logout();
-    this.isAuth = false;
   }
 
-  get isAuthe() {
+  isAuth(name: string): boolean {
+    if (name === 'トップ') {
+      return true;
+    }
+    if (name === 'ログイン' || name === '新規登録') {
+      return !this.authService.isAuthenticate();
+    }
     return this.authService.isAuthenticate();
   }
-
 }
