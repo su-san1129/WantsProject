@@ -26,13 +26,12 @@
       <br>
       <mat-form-field class="wish-form-control">
         <mat-label>金額</mat-label>
-        <input matInput placeholder="パスワードを入力してください" class="login-form-control" formControlName="price"
-          [value]="wishItem?.price | number">
+        <input matInput placeholder="パスワードを入力してください" class="login-form-control" formControlName="price">
       </mat-form-field>
       <br>
       <mat-form-field class="wish-form-control">
         <mat-label>URL(読み取り専用)</mat-label>
-        <input matInput readonly class="login-form-control" formControlName="url" [value]="wishItem?.url">
+        <input matInput readonly class="login-form-control" formControlName="url">
       </mat-form-field>
       <br>
       <img [src]="imgPath">

@@ -1,71 +1,82 @@
-<div class="wrapper">
-  <pre>{{userGroupForm.value | json}}</pre>
-  <mat-card class="my-2">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>新規ユーザーグループ登録</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form class="user-group-form" [formGroup]="userGroupForm">
-        <span>&nbsp;&nbsp;&nbsp;</span>
-        <mat-form-field class="user-group-form-control">
-          <mat-label>ユーザーグループ名</mat-label>
-          <input matInput placeholder="ユーザーグループ名を入力してください" type="text" formControlName="groupName" value=""
-            class="user-group-form-control" />
-        </mat-form-field>
-        <br>
-        <div>ユーザーを招待する<button mat-stroked-button class="user-group-form-button" (click)="addOptionForm()">追加</button>
-        </div>
-        <span>1.</span>
-        <mat-form-field class="user-group-form-control">
-          <mat-label>メールアドレス</mat-label>
-          <input matInput placeholder="user@example.com" type="email" formControlName="mailAddress" value=""
-            class="user-group-form-control" />
-        </mat-form-field>
-        <br>
-        <div formArrayName="options">
-          <div *ngFor="let option of options.controls; let i = index">
-            <div [formGroupName]="i">
-              <span>{{i+2}}.</span>
-              <mat-form-field class="user-group-form-control">
-                <mat-label>メールアドレス</mat-label>
-                <input matInput placeholder="user@example.com" type="email" formControlName="mailAddress" value=""
-                  class="user-group-form-control" />
-              </mat-form-field>
-              <button mat-stroked-button color="warn" class="user-group-form-button"
-                (click)="removeOptionForm(i)">削除</button>
+<mat-tab-group [backgroundColor]="backGround">
+  <mat-tab label="申請トップ">
+    <div class="wrapper my-2">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let userGroup"> {{userGroup[getColumn(column)]}} </td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let userGroup" [attr.colspan]="columnsToDisplay.length">
+            <div class="user-group-element-detail"
+              [@detailExpand]="userGroup == expandedElement ? 'expanded' : 'collapsed'">
+              <div class="user-group-element-diagram" *ngFor="let user of userGroup.belongsToGroupUsersList">
+                <div class="user-group-element-position"> {{user.id}} </div>
+                <div class="user-group-element-symbol"> {{user.name}} </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <br>
-        <button mat-raised-button color="primary" [disabled]="!userGroupForm.valid" (click)="submit($event)">登録</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+          </td>
+        </ng-container>
 
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-      <td mat-cell *matCellDef="let userGroup"> {{userGroup[getColumn(column)]}} </td>
-    </ng-container>
-
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let userGroup" [attr.colspan]="columnsToDisplay.length">
-        <div class="user-group-element-detail" [@detailExpand]="userGroup == expandedElement ? 'expanded' : 'collapsed'">
-          <div class="user-group-element-diagram" *ngFor="let user of userGroup.belongsToGroupUsersList">
-            <div class="user-group-element-position"> {{user.id}} </div>
-            <div class="user-group-element-symbol"> {{user.name}} </div>
-          </div>
-        </div>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="user-group-element-row"
-      [class.user-group-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-    </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="user-group-detail-row"></tr>
-  </table>
-</div>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="user-group-element-row"
+          [class.user-group-expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="user-group-detail-row"></tr>
+      </table>
+    </div>
+  </mat-tab>
+  <mat-tab label="申請一覧"></mat-tab>
+  <mat-tab label="申請可能リスト"></mat-tab>
+  <mat-tab label="グループ 新規登録">
+    <div class="wrapper">
+      <mat-card class="my-2">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>新規ユーザーグループ登録</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="user-group-form" [formGroup]="userGroupForm">
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <mat-form-field class="user-group-form-control">
+              <mat-label>ユーザーグループ名</mat-label>
+              <input matInput placeholder="ユーザーグループ名を入力してください" type="text" formControlName="groupName" value=""
+                class="user-group-form-control" />
+            </mat-form-field>
+            <br>
+            <div>ユーザーを招待する<button mat-stroked-button class="user-group-form-button"
+                (click)="addOptionForm()">追加</button>
+            </div>
+            <span>1.</span>
+            <mat-form-field class="user-group-form-control">
+              <mat-label>メールアドレス</mat-label>
+              <input matInput placeholder="user@example.com" type="email" formControlName="mailAddress" value=""
+                class="user-group-form-control" />
+            </mat-form-field>
+            <br>
+            <div formArrayName="options">
+              <div *ngFor="let option of options.controls; let i = index">
+                <div [formGroupName]="i">
+                  <span>{{i+2}}.</span>
+                  <mat-form-field class="user-group-form-control">
+                    <mat-label>メールアドレス</mat-label>
+                    <input matInput placeholder="user@example.com" type="email" formControlName="mailAddress" value=""
+                      class="user-group-form-control" />
+                  </mat-form-field>
+                  <button mat-stroked-button color="warn" class="user-group-form-button"
+                    (click)="removeOptionForm(i)">削除</button>
+                </div>
+              </div>
+            </div>
+            <br>
+            <button mat-raised-button color="primary" [disabled]="!userGroupForm.valid"
+              (click)="submit($event)">登録</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>

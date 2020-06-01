@@ -14,7 +14,7 @@ export class WishListShowComponent implements OnInit {
   @Input() wishItems: WishItem[];
   @Output() wishItemsChange: EventEmitter<WishItem[]> = new EventEmitter<WishItem[]>();
 
-  isMouseEnter = false;
+  selectedId = '';
 
   constructor(private wishService: WishService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
@@ -36,12 +36,16 @@ export class WishListShowComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  cardMouseEnter() {
-    this.isMouseEnter = true;
+  isTransform(id: string): boolean {
+    return this.selectedId === id;
+  }
+
+  cardMouseEnter(id: string) {
+    this.selectedId = id;
   }
 
   cardMouseLeave() {
-    this.isMouseEnter = false;
+    this.selectedId = '';
   }
 
   openDialog(id: number): void {

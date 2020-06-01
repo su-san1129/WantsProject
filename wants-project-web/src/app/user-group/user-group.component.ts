@@ -23,7 +23,9 @@ export class UserGroupComponent implements OnInit {
   constructor(private fb: FormBuilder, private userGroupService: UserGroupService, private auth: AuthenticateService) { }
 
   dataSource: UserGroup[];
+  backGround = 'primary';
   columnsToDisplay = ['#', '名前', '作成日', '更新日'];
+
   expandedElement: string[] | null;
 
   userGroupRequest: UserGroupRequest;
@@ -49,7 +51,6 @@ export class UserGroupComponent implements OnInit {
   }
 
   submit(e: Event): void {
-    console.log('submit method');
     const mailList: string[] = this.options.value.filter(ary => ary.mailAddress).map(ary => ary.mailAddress);
     mailList.push(this.userGroupForm.get('mailAddress').value);
     this.userGroupRequest = new UserGroupRequest(this.groupName.value, mailList);

@@ -32,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RegisterUserFromGroupComponent } from './parts/register-user-from-group/register-user-from-group.component';
 import { RegisterUserFromGroupDialogComponent } from './parts/register-user-from-group-dialog/register-user-from-group-dialog.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { RegisterUserFromGroupDialogComponent } from './parts/register-user-from
     MatProgressBarModule,
     MatTableModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }

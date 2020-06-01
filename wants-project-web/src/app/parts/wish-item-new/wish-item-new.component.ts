@@ -37,7 +37,12 @@ export class WishItemNewComponent implements OnInit {
   analysisUrl(e: Event): void {
     this.flag = true;
     this.wishService.save(this.url.value).subscribe((wishItem) => {
-      this.wishItem = wishItem;
+      console.log(wishItem);
+      this.name.setValue(wishItem.name);
+      this.price.setValue(wishItem.price);
+      this.salePrice.setValue(wishItem.salePrice);
+      this.imagePath.setValue(wishItem.imagePath);
+      this.url.setValue(wishItem.url);
       this.checkImgPath(wishItem);
     },
       () => this.flag = false,
@@ -47,6 +52,12 @@ export class WishItemNewComponent implements OnInit {
   }
 
   saveWishItem() {
+    this.wishItem = new WishItem();
+    this.wishItem.name = this.name.value;
+    this.wishItem.price = this.price.value;
+    this.wishItem.salePrice = this.salePrice.value;
+    this.wishItem.imagePath = this.imagePath.value;
+    this.wishItem.url = this.url.value;
     this.wishService.saveWishItem(this.wishItem).subscribe(
       wishItem => {
         console.log(wishItem);
@@ -62,6 +73,11 @@ export class WishItemNewComponent implements OnInit {
   get url(): AbstractControl {
     return this.wishItemForm.get('url');
   }
+
+  get name(): AbstractControl { return this.wishItemForm.get('name'); }
+  get price(): AbstractControl { return this.wishItemForm.get('price'); }
+  get salePrice(): AbstractControl { return this.wishItemForm.get('salePrice'); }
+  get imagePath(): AbstractControl { return this.wishItemForm.get('imagePath'); }
 
   private checkImgPath(wishItem: WishItem) {
     if (wishItem.imagePath !== '' && wishItem.imagePath !== null) {

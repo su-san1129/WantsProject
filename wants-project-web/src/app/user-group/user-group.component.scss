@@ -1,3 +1,32 @@
+.example-container {
+  height: 100%;
+  background: #eee;
+
+  .sidenav-container {
+    width: 15%;
+    border-right: #eee;
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    .sidenav-list {
+      list-style: none;
+      padding: 10px 0 10px 20px;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+      &:hover {
+        background-color: #eeefff;
+      }
+
+    }
+  }
+
+}
+
+.active-color {
+  background-color: #eee;
+}
+
 .user-group-form-control{
   width: 80%;
   margin-left: 10px;
