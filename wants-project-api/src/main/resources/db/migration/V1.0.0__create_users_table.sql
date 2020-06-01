@@ -12,4 +12,4 @@ CREATE TABLE users (
 ) ;
 
 -- ユーザー　サンプル (password: admin)
-INSERT INTO users (user_id, name, mail_address, password, role, is_member) VALUES ('user1', 'user1', 'user@wants.co.jp', '$2a$10$Yj/Vp9YW6r0RwsUWa4bvTecsu0jRLYMZgMziXFapsKggLF5vNJguO', 'MEMBER', 'true');
+INSERT INTO users (user_id, name, mail_address, password, role, is_member) VALUES ('user1', 'user1', 'user@wants.co.jp', '$2a$10$Yj/Vp9YW6r0RwsUWa4bvTecsu0jRLYMZgMziXFapsKggLF5vNJguO', 'ADMIN', 'true');

@@ -3,6 +3,7 @@ package jp.co.wants.wants.service;
 import jp.co.wants.wants.IdGenerator;
 import jp.co.wants.wants.domain.PreUser;
 import jp.co.wants.wants.domain.User;
+import jp.co.wants.wants.domain.UserRole;
 import jp.co.wants.wants.form.RegisterForm;
 import jp.co.wants.wants.form.RegisterPreUserForm;
 import jp.co.wants.wants.repository.PreUserRepository;
@@ -29,7 +30,7 @@ public class UserService {
                 .name(registerForm.getName())
                 .mailAddress(registerForm.getMailAddress())
                 .password(passwordEncoder.encode(registerForm.getPassword()))
-                .role("MEMBER")
+                .role(UserRole.MEMBER.name())
                 .isMember(false)
                 .build();
         mailSenderService.send(user.getUserId());
@@ -42,7 +43,7 @@ public class UserService {
                 .name(registerForm.getName())
                 .mailAddress(registerForm.getMailAddress())
                 .password(passwordEncoder.encode(registerForm.getPassword()))
-                .role("MEMBER")
+                .role(UserRole.MEMBER.name())
                 .isMember(true)
                 .build();
 

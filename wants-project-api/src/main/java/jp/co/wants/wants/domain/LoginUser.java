@@ -16,7 +16,6 @@ public class LoginUser extends org.springframework.security.core.userdetails.Use
     public Collection<GrantedAuthority> getAuthorities() {
         return super.getAuthorities();
     }
-
     public User getUser(){
         return user;
     }
