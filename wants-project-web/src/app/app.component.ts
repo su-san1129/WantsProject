@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthenticateService } from './service/authenticate.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +8,3 @@ import { AuthenticateService } from './service/authenticate.service';
 export class AppComponent {
   title = 'wants-project-web';
 }
-
