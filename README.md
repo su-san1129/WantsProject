@@ -12,7 +12,7 @@ wants-project-web => Angularファイル
 
 ## 概要等
 open-jdk: 11  
-angular-cli: 9
+angular-cli: 11
 
 ## 環境構築
 wants-project-web => Angularのため、
