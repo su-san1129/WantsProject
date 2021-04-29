@@ -69,7 +69,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTableModule,
     MatIconModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
+    DeleteDialog
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }
