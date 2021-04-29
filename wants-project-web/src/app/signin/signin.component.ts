@@ -15,7 +15,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private authService: AuthenticateService,
-    // tslint:disable-next-line: variable-name
+    // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
     private _snackBar: MatSnackBar
   ) { }
 

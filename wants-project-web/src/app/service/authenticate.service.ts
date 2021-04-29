@@ -36,7 +36,7 @@ export class AuthenticateService {
   }
 
   public test(): void {
-    // tslint:disable-next-line: max-line-length
+    // eslint-disable-next-line max-len
     this.decodeJWT();
     this.http.get(ResourcePath.USERS).subscribe(response => console.log(response));
   }

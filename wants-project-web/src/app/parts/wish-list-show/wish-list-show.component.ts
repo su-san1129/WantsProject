@@ -63,11 +63,11 @@ export class WishListShowComponent implements OnInit {
 }
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'delete-dialog',
   templateUrl: 'delete-dialog.html',
 })
-// tslint:disable-next-line: component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class DeleteDialog {
 
   constructor(public dialogRef: MatDialogRef<DeleteDialog>, @Inject(MAT_DIALOG_DATA) public data) { }
