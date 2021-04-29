@@ -48,7 +48,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     AuthenticateComponent,
     UserGroupConfirmComponent,
     RegisterUserFromGroupComponent,
-    RegisterUserFromGroupDialogComponent
+    RegisterUserFromGroupDialogComponent,
+    DeleteDialog
   ],
   imports: [
     BrowserModule,
@@ -69,8 +70,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTableModule,
     MatIconModule,
     MatDialogModule,
-    MatSidenavModule,
-    DeleteDialog
+    MatSidenavModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }
