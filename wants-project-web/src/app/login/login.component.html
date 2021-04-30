@@ -1,0 +1,19 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="loginForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+    <nz-form-control [nzXs]="24" nzErrorTip="E-mail の形式が正しくありません。">
+      <input nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzXs]="24" nzFor="password" nzRequired>パスワード</nz-form-label>
+    <nz-form-control [nzXs]="24" nzErrorTip="パスワードを入力してください。">
+      <input nz-input type="password" id="password" formControlName="password" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control>
+      <button class="btn-right" nz-button nzType="primary">ログイン</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

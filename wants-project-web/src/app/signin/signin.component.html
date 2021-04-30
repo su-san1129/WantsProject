@@ -1,0 +1,43 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzXs]="24" nzFor="username" nzRequired
+        nzTooltipTitle="ユーザー名">
+        <span>ユーザー名</span>
+      </nz-form-label>
+      <nz-form-control [nzXs]="24" nzErrorTip="ユーザー名を入力してください。">
+        <input nz-input id="username" formControlName="username" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+      <nz-form-control [nzXs]="24" nzErrorTip="E-mail の形式が正しくありません。">
+        <input nz-input formControlName="email" id="email" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzXs]="24" nzFor="password" nzRequired>パスワード</nz-form-label>
+      <nz-form-control [nzXs]="24" nzErrorTip="Please input your password!">
+        <input nz-input type="password" id="password" formControlName="password"
+          (ngModelChange)="updateConfirmValidator()" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzXs]="24" nzFor="checkPassword" nzRequired>パスワード（確認用）</nz-form-label>
+      <nz-form-control [nzXs]="24" [nzErrorTip]="errorTpl">
+        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            パスワード（確認用）を入力してください。
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            パスワードが一致していません。
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control>
+        <button class="btn-right" nz-button nzType="primary">登録</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
