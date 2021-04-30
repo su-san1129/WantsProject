@@ -22,24 +22,24 @@ public class MailSenderService {
     private final UserRepository userRepository;
 
     @Value("${spring.mail.username}")
-    private String setToMailAddress;
+    private String setToEmail;
 
     @Async
     public void send(final String id) {
         final String encodeBase64 = Base64.getUrlEncoder().encodeToString(id.getBytes());
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(this.setToMailAddress);
-        msg.setFrom(this.setToMailAddress);
+        msg.setTo(this.setToEmail);
+        msg.setFrom(this.setToEmail);
         msg.setSubject("登録ありがとうございます。");
         msg.setText("本アカウントを有効にするために、下記URLを確認してください\nhttp://localhost:4200/authenticate?validateId=" + encodeBase64);
         mailSender.send(msg);
     }
 
     @Async
-    public void sendForUserGroup(final UserGroup userGroup, final String mailAddress, final String userName) {
+    public void sendForUserGroup(final UserGroup userGroup, final String email, final String userName) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(mailAddress);
-        msg.setFrom(this.setToMailAddress);
+        msg.setTo(email);
+        msg.setFrom(this.setToEmail);
         msg.setSubject("グループへの招待");
         msg.setText(userName + "さんから「" + userGroup.getName() + "」のグループに招待されました\n" +
                     "下記URLを確認してください\nhttp://localhost:4200/user_group_confirm?id=" + userGroup.getId());
@@ -50,8 +50,8 @@ public class MailSenderService {
     public void sendToNewUserForUserGroup(final UserGroup userGroup, final PreUser preUser, final String userName) {
         final String encodeBase64 = Base64.getUrlEncoder().encodeToString(preUser.getUserId().getBytes());
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(preUser.getMailAddress());
-        msg.setFrom(this.setToMailAddress);
+        msg.setTo(preUser.getEmail());
+        msg.setFrom(this.setToEmail);
         msg.setSubject("グループへの招待");
         msg.setText(new StringBuilder()
                 .append(userName)

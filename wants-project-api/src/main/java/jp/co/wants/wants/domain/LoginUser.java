@@ -8,7 +8,7 @@ public class LoginUser extends org.springframework.security.core.userdetails.Use
     private final User user;
 
     public LoginUser(User user, Collection<? extends GrantedAuthority> authorities) {
-        super(user.getMailAddress(), user.getPassword(), authorities);
+        super(user.getEmail(), user.getPassword(), authorities);
         this.user = user;
     }
 

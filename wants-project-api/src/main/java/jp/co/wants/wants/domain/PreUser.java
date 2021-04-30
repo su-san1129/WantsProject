@@ -12,5 +12,5 @@ public class PreUser {
     @Id
     private Integer id;
     private String userId;
-    private String mailAddress;
+    private String email;
 }

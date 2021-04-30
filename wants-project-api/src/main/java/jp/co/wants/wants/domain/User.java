@@ -13,7 +13,7 @@ public class User {
     private Integer id;
     private String userId;
     private String name;
-    private String mailAddress;
+    private String email;
     private String password;
     private String role;
     private boolean isMember;

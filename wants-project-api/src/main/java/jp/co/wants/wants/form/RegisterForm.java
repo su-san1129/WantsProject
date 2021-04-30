@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class RegisterForm {
     private String name;
-    private String mailAddress;
+    private String email;
     private String password;
 }

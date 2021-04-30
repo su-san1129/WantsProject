@@ -42,8 +42,8 @@ public class UserGroupService {
 
         groupForm.getMailList().forEach(
                 mail -> {
-                    final Optional<User> user = userRepository.findByMailAddress(mail);
-                    final Optional<PreUser> preUser = preUserRepository.findByMailAddress(mail);
+                    final Optional<User> user = userRepository.findByEmail(mail);
+                    final Optional<PreUser> preUser = preUserRepository.findByEmail(mail);
                     if(user.isPresent()) {
                         existUsers.add(user.get());
                     } else if(preUser.isPresent()) {
@@ -54,8 +54,8 @@ public class UserGroupService {
                 });
 
         List<PreUser> saveUsers = (List<PreUser>) preUserRepository.saveAll(mailList.stream()
-                .map( mailAddress -> PreUser.builder()
-                        .mailAddress(mailAddress)
+                .map( email -> PreUser.builder()
+                        .email(email)
                         .userId(IdGenerator.setPrimaryKey())
                         .build())
                 .collect(Collectors.toList()));
@@ -80,7 +80,7 @@ public class UserGroupService {
                 .build());
 
         saveUsers.forEach(preUser -> mailSenderService.sendToNewUserForUserGroup(group, preUser, loginUser.getName()));
-        existUsers.forEach(user -> mailSenderService.sendForUserGroup(group, user.getMailAddress(), loginUser.getName()));
+        existUsers.forEach(user -> mailSenderService.sendForUserGroup(group, user.getEmail(), loginUser.getName()));
 
         return  (List<BelongsToGroupUsers>) belongsToGroupUserRepository.saveAll(belongsToGroupUsers);
     }
@@ -103,7 +103,7 @@ public class UserGroupService {
             final List<User> users = allByGroupId.stream()
                     .map(bTgu -> userRepository.findByUserId(bTgu.getUserId()).orElseGet(()-> {
                         final PreUser preUser = preUserRepository.findByUserId(bTgu.getUserId()).orElseThrow();
-                        return User.builder().userId(preUser.getUserId()).mailAddress(preUser.getMailAddress()).build();
+                        return User.builder().userId(preUser.getUserId()).email(preUser.getEmail()).build();
                     }))
                     .collect(Collectors.toList());
             return UserGroupJoinUser.builder()

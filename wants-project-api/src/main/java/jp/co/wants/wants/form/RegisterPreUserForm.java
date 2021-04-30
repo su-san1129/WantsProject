@@ -8,6 +8,6 @@ import lombok.Data;
 public class RegisterPreUserForm {
     private String userId;
     private String name;
-    private String mailAddress;
+    private String email;
     private String password;
 }

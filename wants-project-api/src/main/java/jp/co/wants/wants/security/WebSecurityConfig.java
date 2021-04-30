@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(this.corsConfigurationSource());
         http.formLogin()
                 .loginProcessingUrl("/api/login").permitAll()
-                .usernameParameter("mailAddress")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .successHandler(successHandler())
                 .failureHandler(failureHandler());
