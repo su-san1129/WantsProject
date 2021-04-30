@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-    @Query("SELECT * FROM users WHERE mail_address = :email")
+    @Query("SELECT * FROM users WHERE email = :email")
     Optional<User> findByEmail(@Param("email") String email);
 
     @Query("SELECT * FROM users WHERE user_id = :userId")

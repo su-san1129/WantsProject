@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface PreUserRepository extends CrudRepository<PreUser, Integer> {
-    @Query("SELECT * FROM pre_users WHERE mail_address = :email")
+    @Query("SELECT * FROM pre_users WHERE email = :email")
     Optional<PreUser> findByEmail(@Param("email") String email);
 
     @Query("SELECT * FROM pre_users WHERE user_id = :userId")
