@@ -5,13 +5,24 @@
         <span>ユーザー名</span>
       </nz-form-label>
       <nz-form-control [nzXs]="24" nzErrorTip="ユーザー名を入力してください。">
-        <input nz-input id="username" formControlName="username" />
+        <input nz-input id="name" formControlName="name" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-      <nz-form-control [nzXs]="24" nzErrorTip="E-mail の形式が正しくありません。">
+      <nz-form-control [nzXs]="24" [nzErrorTip]="emailErrors">
         <input nz-input formControlName="email" id="email" />
+        <ng-template #emailErrors let-control>
+            <ng-container *ngIf="control.hasError('email')">
+              メールアドレスの形式が正しくありません。
+            </ng-container>
+            <ng-container *ngIf="control.hasError('required')">
+              メールアドレスを入力してください。
+            </ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">
+              そのメールアドレスは既に登録されています。
+            </ng-container>
+          </ng-template>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>

@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 registerLocaleData(en);
 
@@ -22,7 +23,8 @@ registerLocaleData(en);
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    AuthenticateComponent
   ],
   imports: [
     BrowserModule,
