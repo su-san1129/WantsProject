@@ -34,7 +34,6 @@ public class WishItemService {
                                  .deleteCharAt(salePrice.indexOf(","))
                                  .toString());
             }
-            System.out.println("displaySalePrice = " + displaySalePrice);
             final StringBuilder price = new StringBuilder(document.select("#priceblock_ourprice").text());
             if(!price.toString().isBlank()){
                 displayPrice = Integer.parseInt(
@@ -43,7 +42,6 @@ public class WishItemService {
                              .toString());
             }
 
-            System.out.println("displayPrice = " + displayPrice);
             final Optional<String> productTitle = Optional.ofNullable(document.select("#productTitle").text());
             final Optional<Elements> img = Optional.ofNullable(document.select("#imgTagWrapperId img"));
             final int imgStrStart = img.toString().indexOf("data-old-hires=\"https://images-na");

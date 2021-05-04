@@ -4,8 +4,10 @@ import jp.co.wants.wants.domain.PreUser;
 import jp.co.wants.wants.domain.UserGroup;
 import jp.co.wants.wants.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Async;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class MailSenderService {
@@ -32,7 +35,12 @@ public class MailSenderService {
         msg.setFrom(this.setToEmail);
         msg.setSubject("登録ありがとうございます。");
         msg.setText("本アカウントを有効にするために、下記URLを確認してください\nhttp://localhost:4200/authenticate?validateId=" + encodeBase64);
-        mailSender.send(msg);
+        try {
+            mailSender.send(msg);
+        } catch (MailException e) {
+            e.printStackTrace();
+            log.warn("メールの送信に失敗しました。 Message: {}", e.getMessage());
+        }
     }
 
     @Async
@@ -42,7 +50,7 @@ public class MailSenderService {
         msg.setFrom(this.setToEmail);
         msg.setSubject("グループへの招待");
         msg.setText(userName + "さんから「" + userGroup.getName() + "」のグループに招待されました\n" +
-                    "下記URLを確認してください\nhttp://localhost:4200/user_group_confirm?id=" + userGroup.getId());
+                "下記URLを確認してください\nhttp://localhost:4200/user_group_confirm?id=" + userGroup.getId());
         mailSender.send(msg);
     }
 

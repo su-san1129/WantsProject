@@ -48,7 +48,6 @@ public class UserGroupService {
                         existUsers.add(user.get());
                     } else if(preUser.isPresent()) {
                     } else {
-                        System.out.println(mail);
                         mailList.add(mail);
                     }
                 });
