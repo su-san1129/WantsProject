@@ -1,5 +1,6 @@
 package jp.co.wants.wants.security;
 
+import jp.co.wants.wants.domain.UserRole;
 import jp.co.wants.wants.repository.UserRepository;
 import jp.co.wants.wants.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests()
                 .antMatchers("/api/users/register/**", "/api/users/pre_user/**").permitAll()
-                .antMatchers("/api/**").authenticated();
+                .antMatchers("/api/**").hasAnyRole(UserRole.MEMBER.name(), UserRole.ADMIN.name());
         http.csrf().disable();
         http.cors().configurationSource(this.corsConfigurationSource());
         http.formLogin()
